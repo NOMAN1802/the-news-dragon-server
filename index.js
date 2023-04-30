@@ -2,14 +2,15 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = process.env.PORT || 5000;
-
+const categories = require('./Data/categories.json');
+const news = require('./Data/news.json')
+app.use(cors());
 
 app.get('/',(req, res)=>{
    res.send('Dragon is running')
 });
-const categories = require('./Data/categories.json');
-const news = require('./Data/news.json')
-app.use(cors());
+
+
 app.get('/categories', (req, res)=>{
    res.send(categories)
 })
@@ -23,7 +24,7 @@ app.get('/news/:id',(req , res) =>{
    res.send(selectedNews)
 })
 
-app.get('/categories/:id' ,(req , res) =>{
+app.get('/category/:id' ,(req , res) =>{
    const id = parseInt(req.params.id);
    console.log(id);
    if(id === 0){
